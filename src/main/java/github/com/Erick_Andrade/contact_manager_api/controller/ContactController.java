@@ -2,6 +2,7 @@ package github.com.Erick_Andrade.contact_manager_api.controller;
 
 import github.com.Erick_Andrade.contact_manager_api.entity.Contact;
 import github.com.Erick_Andrade.contact_manager_api.service.ContactService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class ContactController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Contact create(@RequestBody Contact contact) {
+    public Contact create(@Valid @RequestBody Contact contact) {
         return contactService.create(contact);
     }
 
@@ -34,7 +35,7 @@ public class ContactController {
 
     @PutMapping("/{id}")
     public Contact update(@PathVariable(name = "id") Long id,
-                          @RequestBody Contact contact) {
+                          @Valid @RequestBody Contact contact) {
         return contactService.update(id, contact);
     }
 
