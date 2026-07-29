@@ -24,4 +24,25 @@ public class ContactService {
         return contactRepository.findAll();
     }
 
+    public Contact findById(Long id) {
+        return contactRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Contact not found with id: " + id));
+    }
+
+    public Contact update(Long id, Contact updatedContact) {
+        Contact existingContact = findById(id);
+        existingContact.setName(updatedContact.getName());
+        existingContact.setEmail(updatedContact.getEmail());
+        existingContact.setPhone(updatedContact.getPhone());
+        return contactRepository.save(existingContact);
+    }
+
+    public void delete(Long id) {
+        Contact existingContact = findById(id);
+        contactRepository.delete(existingContact);
+    }
+
+
+
+
 }

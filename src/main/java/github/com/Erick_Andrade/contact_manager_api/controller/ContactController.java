@@ -27,4 +27,20 @@ public class ContactController {
         return contactService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Contact findById(@PathVariable(name = "id") Long id) {
+        return contactService.findById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Contact update(@PathVariable(name = "id") Long id,
+                          @RequestBody Contact contact) {
+        return contactService.update(id, contact);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable(name = "id") Long id) {
+        contactService.delete(id);
+    }
 }
