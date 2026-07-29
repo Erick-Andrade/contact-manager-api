@@ -1,6 +1,7 @@
 package github.com.Erick_Andrade.contact_manager_api.service;
 
 import github.com.Erick_Andrade.contact_manager_api.entity.Contact;
+import github.com.Erick_Andrade.contact_manager_api.excepetion.ContactNotFoundException;
 import github.com.Erick_Andrade.contact_manager_api.repository.ContactRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class ContactService {
 
     public Contact findById(Long id) {
         return contactRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("Contact not found with id: " + id));
+                orElseThrow(() -> new ContactNotFoundException(id));
     }
 
     public Contact update(Long id, Contact updatedContact) {
